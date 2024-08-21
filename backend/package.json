@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch 'src/' --exec ts-node src/index.ts -e ts"
+    "dev": "nodemon --watch 'src/' --exec ts-node src/server.ts -e ts"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
     "typescript": "^5.5.4"
