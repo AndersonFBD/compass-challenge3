@@ -10,7 +10,7 @@ router.post("/country/add", async (req: Request, res: Response) => {
   const name: string = req.body.name;
   try {
     const country = await CountryInstance.create({ id, continentId, name });
-    return res.json({ country, msg: "success on adding continent" });
+    return res.json({ country, msg: "success on adding country" });
   } catch (error) {
     return res.json({
       msg: "error on creation",

@@ -79,7 +79,7 @@ TourInstance.init(
   },
   {
     sequelize: db,
-    tableName: "country",
+    tableName: "tour",
   }
 );
 

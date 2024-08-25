@@ -30,7 +30,7 @@ router.post("/tour/add", async (req: Request, res: Response) => {
       min_age,
       imageurl,
     });
-    return res.json({ tour, msg: "success on adding continent" });
+    return res.json({ tour, msg: "success on adding tour" });
   } catch (error) {
     return res.json({
       msg: "error on creation",

@@ -4,6 +4,9 @@ import continentRoutes from "./routes/continentRoutes";
 import countryRoutes from "./routes/countryRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import tourRoutes from "./routes/tourRoutes";
+import bookingRoutes from "./routes/bookingRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
+
 db.sync().then(() => {
   console.log("connect to db");
 });
@@ -16,5 +19,7 @@ app.use(continentRoutes);
 app.use(countryRoutes);
 app.use(categoryRoutes);
 app.use(tourRoutes);
+app.use(bookingRoutes);
+app.use(reviewRoutes);
 
 app.listen(port, () => console.log("listening on port: " + port));
