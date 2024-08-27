@@ -2,6 +2,7 @@ import styles from "./footer.module.css";
 import { LiaFacebook } from "react-icons/lia";
 import { PiTwitterLogo } from "react-icons/pi";
 import { PiLinkedinLogoBold } from "react-icons/pi";
+import { LuSend } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -39,10 +40,57 @@ const Footer = () => {
         </div>
       </section>
       <section className={styles.linkSection}>
-        <p>section 2</p>
+        <div className={styles.sec2textcontainer}>
+          <p className={styles.sec2Title}>Company</p>
+          <p>About Us</p>
+          <p>Contact Us</p>
+          <p>Travel Guides</p>
+          <p>Data Policy</p>
+        </div>
+        <div className={styles.sec2textcontainer}>
+          <p className={styles.sec2Title}>Top Destination</p>
+          <p>Las Vegas</p>
+          <p>New York City</p>
+          <p>San Francisco</p>
+          <p>Hawaii</p>
+        </div>
+        <div className={styles.sec2textcontainer}>
+          <p className={styles.sec2Title}>
+            <br />
+          </p>
+          <p>Tokyo</p>
+          <p>Sydney</p>
+          <p>Melbourne</p>
+          <p>Dubai</p>
+        </div>
       </section>
       <section className={styles.newsletterSection}>
-        <p>section 3</p>
+        <div>
+          <p className={styles.sec2Title}>Sign up Newsletter</p>
+        </div>
+        <div className={styles.inputarea}>
+          <div className={styles.emailField}>
+            <LuSend
+              style={{
+                fontSize: "16px",
+                color: "gray",
+                verticalAlign: "middle",
+              }}
+            />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter email..."
+            />
+          </div>
+          <div className={styles.newsletterbutton}>
+            <input type="button" value="Submit" />
+          </div>
+          <div className={styles.sec3flavortext}>
+            <p>2023 Trisog All Rights Reserved</p>
+          </div>
+        </div>
       </section>
     </div>
   );
