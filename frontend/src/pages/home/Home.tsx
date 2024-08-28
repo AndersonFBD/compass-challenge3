@@ -17,7 +17,7 @@ const Home = () => {
       <Header />
       <main>
         <div className={styles.mainContainer}>
-          <h1>página home</h1>
+          <h1 className="text-red-800">página home</h1>
         </div>
       </main>
       <footer>

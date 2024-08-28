@@ -8,10 +8,3 @@ main {
 .mainContainer {
   height: 100%;
 }
-footer {
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  min-width: 100vw;
-  margin-top: auto;
-}
