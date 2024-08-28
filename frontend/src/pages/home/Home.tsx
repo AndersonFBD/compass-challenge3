@@ -31,7 +31,9 @@ const Home = () => {
               </p>
             </div>
           </section>
-          <Searchbar />
+          <div className="flex z-10 relative bottom-12">
+            <Searchbar />
+          </div>
         </div>
       </main>
       <footer className="sticky top-[100vh]">
