@@ -4,6 +4,7 @@ export default {
   theme: {
     fontFamily: {
       kaushan: ["kaushan script"],
+      work: ["Work Sans"],
     },
     extend: {},
   },
