@@ -1,3 +1,4 @@
+import TourCard from "../../components/cards/TourCard";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Searchbar from "../../components/searchbar/Searchbar";
@@ -34,6 +35,23 @@ const Home = () => {
           <div className="flex z-10 relative bottom-12">
             <Searchbar />
           </div>
+          <section className="flex flex-col items-center justify-center mt-12">
+            <div id="title-section" className="flex flex-col items-center">
+              <div className="flex flex-row items-baseline">
+                <div className="h-2 -z-10 w-[131px] border-t-2 border-[#A9AFBB]"></div>
+                <p className="font-kaushan mx-1 z-10 text-[#fc5056] text-[24px] ">
+                  Tours
+                </p>
+                <div className="h-2 -z-10 w-[131px] border-t-2 border-[#A9AFBB]"></div>
+              </div>
+              <p className="font-work text-[40px] font-bold">
+                Most Popular Tours
+              </p>
+            </div>
+            <div id="card-section">
+              <TourCard />
+            </div>
+          </section>
         </div>
       </main>
       <footer className="sticky top-[100vh]">

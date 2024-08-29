@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 import db from "./config/database.config";
 import continentRoutes from "./routes/continentRoutes";
 import countryRoutes from "./routes/countryRoutes";
@@ -11,10 +12,16 @@ db.sync().then(() => {
   console.log("connect to db");
 });
 
+const allowedOrigins = ["http://localhost:5173"];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
 const app = express();
 const port = 8000;
 app.use(express.json());
-
+app.use(cors(options));
 app.use(continentRoutes);
 app.use(countryRoutes);
 app.use(categoryRoutes);

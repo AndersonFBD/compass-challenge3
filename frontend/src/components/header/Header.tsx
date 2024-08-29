@@ -9,7 +9,7 @@ import { IoSearch } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
 
 const Header = () => {
-  const isloggedIn = false;
+  const isloggedIn = true;
   return (
     <div className="flex flex-col justify-stretch mx-auto min-w-[100%] min-h-20 bg-[#f3f3f5] items-center">
       <div className="flex flex-row w-full h-4 justify-between my-2">

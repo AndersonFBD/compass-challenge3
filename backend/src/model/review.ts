@@ -86,11 +86,11 @@ ReviewInstance.init(
 
 ReviewInstance.belongsTo(TourInstance, {
   foreignKey: "tourId",
-  as: "tour",
+  as: "Tour",
 });
 TourInstance.hasMany(ReviewInstance, {
   foreignKey: "tourId",
-  as: "tour",
+  as: "Tour",
 });
 
 ReviewInstance.sync({ alter: true });
