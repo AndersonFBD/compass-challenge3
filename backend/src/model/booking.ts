@@ -70,6 +70,7 @@ BookingInstance.init(
   {
     sequelize: db,
     tableName: "booking",
+    freezeTableName: true,
   }
 );
 
@@ -82,4 +83,4 @@ TourInstance.hasMany(BookingInstance, {
   as: "tour",
 });
 
-BookingInstance.sync({ alter: true });
+BookingInstance.sync();

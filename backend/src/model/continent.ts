@@ -24,5 +24,6 @@ ContinentInstance.init(
   {
     sequelize: db,
     tableName: "continent",
+    freezeTableName: true,
   }
 );

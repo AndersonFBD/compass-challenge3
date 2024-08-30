@@ -1,71 +1,57 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { TourProps } from "../../types/tourProps";
+import { CiStar } from "react-icons/ci";
+import { CiClock2 } from "react-icons/ci";
 
-type TourProps = {
-  id: number;
-  countryId: number;
-  categoryId: number;
-  city: string;
-  title: string;
-  overview: string;
-  duration: number;
-  price: number;
-  max_people: number;
-  min_age: number;
-  imageurl: string;
-};
-
-const TourCard = () => {
-  const [tourdata, setTourData] = useState<TourProps>();
-
-  const getTour = async () => {
-    try {
-      const { data } = await axios.get(`http://localhost:8000/tour/1`);
-      setTourData(data);
-    } catch (e) {
-      console.log("not found:" + e);
-    }
-  };
-
-  useEffect(() => {
-    getTour();
-  }, []);
-
+const TourCard: React.FC<TourProps> = ({
+  id,
+  countryId,
+  categoryId,
+  city,
+  title,
+  overview,
+  duration,
+  price,
+  max_people,
+  min_age,
+  imageurl,
+}: TourProps) => {
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-        <img className="rounded-t-lg" src={tourdata?.imageurl} />
-      </a>
-      <div className="p-5">
-        <a href="#">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {tourdata?.title}
-          </h5>
-        </a>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {tourdata?.overview}
+    <div
+      id="card"
+      className="max-w-[270px] bg-[#F7F8FA] border border-gray-200  shadow"
+    >
+      <img className="rounded-t-lg max-h-[100%]" src={imageurl} alt="" />
+
+      <div className="p-2 text-left">
+        <p className="font-inter text-[12px] text-[#A9AFBB]">{city}</p>
+        <p className="mb-2 text-[18px] w-56 font-work font-bold tracking-tight text-gray-900">
+          {title}
         </p>
-        <a
-          href="#"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Read more
-          <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
-        </a>
+      </div>
+      <div className="py-2 flex flex-row justify-between border-b-2 border-[#A9AFBB] mx-3 my-3">
+        <div className="flex flex-row justify-evenly items-center">
+          <div className="flex flex-row justify-evenly w-10 rounded items-center font-inter text-white bg-[#FC5056] mr-1 px-1">
+            <CiStar size={16} />
+            <p className="font-inter text-[16px]">0</p>
+          </div>
+          <div className="px-1 mx-1">
+            <p className="font-inter text-base text-[#A9AFBB]">0 reviews</p>
+          </div>
+        </div>
+        <div className="flex flex-row justify-between items-center w-20">
+          <CiClock2 size={16} />
+          <p className="text-[#AFA9BB] text-base font-inter">{duration} days</p>
+        </div>
+      </div>
+      <div className="flex flex-row py-2 justify-between mx-4 items-center align-middle">
+        <div>
+          <p className="font-inter text-[#A9AFBB] text-base">Starting From</p>
+        </div>
+        <div>
+          <p className="font-kaushan font-black text-xl ">${price}</p>
+        </div>
       </div>
     </div>
   );

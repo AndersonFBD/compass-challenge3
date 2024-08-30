@@ -8,6 +8,7 @@ type review = {
   locations: number;
   prices: number;
   food: number;
+  amenities: number;
   comfort_and_quality: number;
   overall_rating: number;
 };
@@ -26,8 +27,11 @@ router.post("/review/add", async (req: Request, res: Response) => {
   const locations: number = req.body.locations;
   const prices: number = req.body.prices;
   const food: number = req.body.food;
+  const amenities: number = req.body.amenities;
   const comfort_and_quality: number = req.body.comfort_and_quality;
-  const overall_rating: number = req.body.overall_rating;
+  const overall_rating =
+    (services + locations + prices + food + amenities + comfort_and_quality) /
+    6;
 
   try {
     const review = await ReviewInstance.create({
@@ -40,6 +44,7 @@ router.post("/review/add", async (req: Request, res: Response) => {
       locations,
       prices,
       food,
+      amenities,
       comfort_and_quality,
       overall_rating,
     });

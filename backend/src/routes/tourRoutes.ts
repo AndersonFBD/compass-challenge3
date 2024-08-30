@@ -1,5 +1,8 @@
 import express, { Request, Response } from "express";
 import { TourInstance } from "../model/tour";
+import { ReviewInstance } from "../model/review";
+import { CountryInstance } from "../model/country";
+import { literal, Sequelize } from "sequelize";
 
 const router = express.Router();
 
@@ -63,6 +66,48 @@ router.get("/tour/:id", async (req: Request, res: Response) => {
   } catch (error) {
     return res.json({
       msg: "error on search",
+      status: 500,
+    });
+  }
+});
+
+router.get("/card-info/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const countryName = await TourInstance.findOne({
+      include: [
+        {
+          model: CountryInstance,
+          as: "country",
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    const reviewCount = await ReviewInstance.count({
+      where: {
+        tourId: id,
+      },
+    });
+
+    const avgRate = await ReviewInstance.findOne({
+      where: {
+        tourId: id,
+      },
+      attributes: [
+        [Sequelize.fn("AVG", Sequelize.col("Overall_rating")), "averageRating"],
+      ],
+      raw: true,
+    });
+
+    return res.json({
+      countryName,
+      reviewCount,
+      avgRate,
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
       status: 500,
     });
   }

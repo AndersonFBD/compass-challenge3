@@ -5,6 +5,7 @@ export default {
     fontFamily: {
       kaushan: ["kaushan script"],
       work: ["Work Sans"],
+      inter: ["inter"],
     },
     extend: {},
   },

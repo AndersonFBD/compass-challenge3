@@ -1,10 +1,28 @@
+import { useEffect, useState } from "react";
 import TourCard from "../../components/cards/TourCard";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Searchbar from "../../components/searchbar/Searchbar";
+import { TourProps } from "../../types/tourProps";
+import axios from "axios";
 
 const Home = () => {
   document.title = "Trisog - Home";
+
+  //tour cards
+  const [tourdata, setTourData] = useState<TourProps[]>([]);
+  const getTour = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:8000/tours");
+      setTourData(data.tours);
+    } catch (e) {
+      console.error("Error fetching tours:", e);
+    }
+  };
+
+  useEffect(() => {
+    getTour();
+  }, []);
 
   return (
     <>
@@ -48,8 +66,24 @@ const Home = () => {
                 Most Popular Tours
               </p>
             </div>
-            <div id="card-section">
-              <TourCard />
+            <div id="card-section" className="flex h-[7%]">
+              {tourdata &&
+                tourdata.map((tour: TourProps) => (
+                  <TourCard
+                    key={tour.id}
+                    id={Number(tour.id)}
+                    countryId={Number(tour.countryId)}
+                    categoryId={Number(tour.categoryId)}
+                    city={String(tour.city)}
+                    title={String(tour.title)}
+                    overview={String(tour.overview)}
+                    duration={Number(tour.duration)}
+                    price={Number(tour.price)}
+                    max_people={Number(tour.max_people)}
+                    min_age={Number(tour.min_age)}
+                    imageurl={String(tour.imageurl)}
+                  />
+                ))}
             </div>
           </section>
         </div>
