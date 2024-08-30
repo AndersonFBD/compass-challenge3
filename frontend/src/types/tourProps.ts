@@ -10,4 +10,7 @@ export type TourProps = {
   max_people: number;
   min_age: number;
   imageurl: string;
+  country: string;
+  reviews: number;
+  avgRating: number;
 };

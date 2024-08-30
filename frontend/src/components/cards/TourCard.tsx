@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import axios from "axios";
 import { TourProps } from "../../types/tourProps";
 import { CiStar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
@@ -16,13 +15,20 @@ const TourCard: React.FC<TourProps> = ({
   max_people,
   min_age,
   imageurl,
+  country,
+  reviews,
+  avgRating,
 }: TourProps) => {
   return (
     <div
       id="card"
-      className="max-w-[270px] bg-[#F7F8FA] border border-gray-200  shadow"
+      className="w-[270px] mx-3 bg-[#F7F8FA] border border-gray-200  shadow"
     >
-      <img className="rounded-t-lg max-h-[100%]" src={imageurl} alt="" />
+      <img
+        className="rounded-t-lg max-w-[100%] max-h-48"
+        src={imageurl}
+        alt=""
+      />
 
       <div className="p-2 text-left">
         <p className="font-inter text-[12px] text-[#A9AFBB]">{city}</p>

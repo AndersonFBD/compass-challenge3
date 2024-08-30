@@ -4,10 +4,23 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Searchbar from "../../components/searchbar/Searchbar";
 import { TourProps } from "../../types/tourProps";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import axios from "axios";
 
 const Home = () => {
   document.title = "Trisog - Home";
+
+  //carousel
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 200,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 2,
+  // };
 
   //tour cards
   const [tourdata, setTourData] = useState<TourProps[]>([]);
@@ -29,7 +42,7 @@ const Home = () => {
       <header className="sticky bottom-[100vh]">
         <Header />
       </header>
-      <main className="flex flex-col min-w-full h-[100vh]">
+      <main className="flex flex-col min-w-full h-[200vh]">
         <div className="h-auto">
           <section className="flex flex-col">
             <div
@@ -66,24 +79,29 @@ const Home = () => {
                 Most Popular Tours
               </p>
             </div>
-            <div id="card-section" className="flex h-[7%]">
+            <div className="flex flex-row">
+              {/* <Slider {...settings}> */}
               {tourdata &&
                 tourdata.map((tour: TourProps) => (
-                  <TourCard
-                    key={tour.id}
-                    id={Number(tour.id)}
-                    countryId={Number(tour.countryId)}
-                    categoryId={Number(tour.categoryId)}
-                    city={String(tour.city)}
-                    title={String(tour.title)}
-                    overview={String(tour.overview)}
-                    duration={Number(tour.duration)}
-                    price={Number(tour.price)}
-                    max_people={Number(tour.max_people)}
-                    min_age={Number(tour.min_age)}
-                    imageurl={String(tour.imageurl)}
-                  />
+                  <div key={tour.id} className="p-4">
+                    <TourCard key={tour.id} {...tour} />
+                  </div>
                 ))}
+              {/* </Slider> */}
+            </div>
+            <div className="flex flex-row w-full my-32 justify-evenly">
+              <p>
+                120+ <span>Total Destination</span>
+              </p>
+              <p>
+                500+ <span>Travel Packages</span>
+              </p>
+              <p>
+                12k+ <span>Total Travelers</span>
+              </p>
+              <p>
+                7k+ <span>Positive Reviews</span>
+              </p>
             </div>
           </section>
         </div>
