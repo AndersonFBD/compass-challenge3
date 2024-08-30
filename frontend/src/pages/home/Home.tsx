@@ -1,16 +1,48 @@
+import { useEffect, useState } from "react";
+import TourCard from "../../components/cards/TourCard";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Searchbar from "../../components/searchbar/Searchbar";
+import { TourProps } from "../../types/tourProps";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import axios from "axios";
 
 const Home = () => {
   document.title = "Trisog - Home";
+
+  //carousel
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 200,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 2,
+  // };
+
+  //tour cards
+  const [tourdata, setTourData] = useState<TourProps[]>([]);
+  const getTour = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:8000/tours");
+      setTourData(data.tours);
+    } catch (e) {
+      console.error("Error fetching tours:", e);
+    }
+  };
+
+  useEffect(() => {
+    getTour();
+  }, []);
 
   return (
     <>
       <header className="sticky bottom-[100vh]">
         <Header />
       </header>
-      <main className="flex flex-col min-w-full h-[100vh]">
+      <main className="flex flex-col min-w-full h-[200vh]">
         <div className="h-auto">
           <section className="flex flex-col">
             <div
@@ -34,6 +66,44 @@ const Home = () => {
           <div className="flex z-10 relative bottom-12">
             <Searchbar />
           </div>
+          <section className="flex flex-col items-center justify-center mt-12">
+            <div id="title-section" className="flex flex-col items-center">
+              <div className="flex flex-row items-baseline">
+                <div className="h-2 -z-10 w-[131px] border-t-2 border-[#A9AFBB]"></div>
+                <p className="font-kaushan mx-1 z-10 text-[#fc5056] text-[24px] ">
+                  Tours
+                </p>
+                <div className="h-2 -z-10 w-[131px] border-t-2 border-[#A9AFBB]"></div>
+              </div>
+              <p className="font-work text-[40px] font-bold">
+                Most Popular Tours
+              </p>
+            </div>
+            <div className="flex flex-row">
+              {/* <Slider {...settings}> */}
+              {tourdata &&
+                tourdata.map((tour: TourProps) => (
+                  <div key={tour.id} className="p-4">
+                    <TourCard key={tour.id} {...tour} />
+                  </div>
+                ))}
+              {/* </Slider> */}
+            </div>
+            <div className="flex flex-row w-full my-32 justify-evenly">
+              <p>
+                120+ <span>Total Destination</span>
+              </p>
+              <p>
+                500+ <span>Travel Packages</span>
+              </p>
+              <p>
+                12k+ <span>Total Travelers</span>
+              </p>
+              <p>
+                7k+ <span>Positive Reviews</span>
+              </p>
+            </div>
+          </section>
         </div>
       </main>
       <footer className="sticky top-[100vh]">

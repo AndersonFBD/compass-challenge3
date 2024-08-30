@@ -12,6 +12,7 @@ interface ReviewAttributes {
   locations: number;
   prices: number;
   food: number;
+  amenities: number;
   comfort_and_quality: number;
   overall_rating: number;
 }
@@ -67,6 +68,11 @@ ReviewInstance.init(
       allowNull: false,
       defaultValue: 1,
     },
+    amenities: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     comfort_and_quality: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -81,16 +87,15 @@ ReviewInstance.init(
   {
     sequelize: db,
     tableName: "review",
+    freezeTableName: true,
   }
 );
 
 ReviewInstance.belongsTo(TourInstance, {
   foreignKey: "tourId",
-  as: "tour",
+  as: "Tour",
 });
 TourInstance.hasMany(ReviewInstance, {
   foreignKey: "tourId",
-  as: "tour",
+  as: "Tour",
 });
-
-ReviewInstance.sync({ alter: true });

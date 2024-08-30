@@ -35,6 +35,7 @@ CountryInstance.init(
   {
     sequelize: db,
     tableName: "country",
+    freezeTableName: true,
   }
 );
 
@@ -46,5 +47,3 @@ ContinentInstance.hasMany(CountryInstance, {
   foreignKey: "continentId",
   as: "continent",
 });
-
-CountryInstance.sync({ alter: true });

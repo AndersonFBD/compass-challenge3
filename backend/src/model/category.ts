@@ -24,5 +24,6 @@ CategoryInstance.init(
   {
     sequelize: db,
     tableName: "category",
+    freezeTableName: true,
   }
 );

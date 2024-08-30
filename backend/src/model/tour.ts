@@ -80,6 +80,7 @@ TourInstance.init(
   {
     sequelize: db,
     tableName: "tour",
+    freezeTableName: true,
   }
 );
 
@@ -100,5 +101,3 @@ CategoryInstance.hasMany(TourInstance, {
   foreignKey: "categoryId",
   as: "type",
 });
-
-TourInstance.sync({ alter: true });
