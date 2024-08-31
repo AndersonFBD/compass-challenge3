@@ -4,6 +4,8 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Searchbar from "../../components/searchbar/Searchbar";
 import { TourProps } from "../../types/tourProps";
+import { LuPlayCircle } from "react-icons/lu";
+import { ImCheckmark2 } from "react-icons/im";
 
 import axios from "axios";
 
@@ -194,6 +196,87 @@ const Home = () => {
                     <p className="font-kaushan text-xl">United Kingdom</p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <section className="flex flex-row items-center justify-center my-12 mx-[10%] min-h-[60vh]">
+            <div className="flex flex-row flex-nowrap items-between my-24 relative">
+              <div className="relative -z-20 bg-transparent border-none">
+                <img
+                  src="https://challenge3storedpictures.s3.us-east-2.amazonaws.com/general-assets/watchnow-back-pic.png"
+                  alt=""
+                />
+              </div>
+              <div className="relative -z-10 top-28 right-56 bg-transparent border-none">
+                <img
+                  src="https://challenge3storedpictures.s3.us-east-2.amazonaws.com/general-assets/watchnow-front-pic.png"
+                  alt=""
+                />
+                <div
+                  className="relative flex bottom-20  right-8
+                 bg-[#FC5056] items-center
+                 text-white p-2 z-10
+                 w-64 h-16 border-white border-2"
+                >
+                  <LuPlayCircle size={24} />
+                  <p className="font-kaushan text-2xl text-left ml-1">
+                    Watch Now
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col text-left mt-8">
+              <div className="flex flex-row items-baseline">
+                <p className="font-kaushan mx-1 z-10 text-[#fc5056] text-[24px] ">
+                  Why Choose Us?
+                </p>
+                <div className="h-2 ml-5 w-[158px] border-t-2 border-[#A9AFBB]"></div>
+              </div>
+              <div className="font-work font-bold text-[40px]">
+                <p className="w-96">
+                  Our Experiences Meet High Quality Standards
+                </p>
+              </div>
+              <div className="font-inter text-base">
+                <p className="w-96">
+                  Holisticly optimize proactive strategic theme areas rather
+                  than effective manufactured products create.
+                </p>
+              </div>
+              <div className="flex flex-row my-2">
+                <div className="flex-flex-col justify-between w-[50%]">
+                  <div className="flex items-center my-1">
+                    <ImCheckmark2 color="#fc5056" size={24} />
+                    <p className="ml-2 font-work font-semibold text-base">
+                      Cheap Rates
+                    </p>
+                  </div>
+                  <div className="flex items-center my-1">
+                    <ImCheckmark2 color="#fc5056" size={24} />
+                    <p className="ml-2 font-work font-semibold text-base">
+                      Hand-Picked Tour
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-flex-col justify-between w-[50%]">
+                  <div className="flex items-center my-1">
+                    <ImCheckmark2 color="#fc5056" size={24} />
+                    <p className="ml-2 font-work font-semibold text-base">
+                      Cheap Rates
+                    </p>
+                  </div>
+                  <div className="flex items-center my-1">
+                    <ImCheckmark2 color="#fc5056" size={24} />
+                    <p className="ml-2 font-work font-semibold text-base">
+                      Hand-Picked Tour
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex w-full justify-start mt-4">
+                <button className="border-2 border-[#a9afbb] rounded-lg py-3 px-6 font-work font-semibold text-base">
+                  Contact Us
+                </button>
               </div>
             </div>
           </section>
