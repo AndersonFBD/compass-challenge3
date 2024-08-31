@@ -9,6 +9,7 @@ import { LuPlayCircle } from "react-icons/lu";
 import { ImCheckmark2 } from "react-icons/im";
 
 import axios from "axios";
+import CategoryCard from "../../components/cards/CategoryCard";
 
 const Home = () => {
   document.title = "Trisog - Home";
@@ -259,8 +260,19 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="flex flex-row items-center justify-center my-12 mx-[10%] min-h-[60vh]">
+        <section className="flex flex-col items-center justify-center my-12 mx-[10%] min-h-[60vh]">
           <Titles title="Browse By Category" BoldText="Pick a Tour Type" />
+          <div
+            id="card-section"
+            className="my-4 w-[100%] flex flex-row justify-evenly"
+          >
+            <CategoryCard />
+            <CategoryCard />
+            <CategoryCard />
+            <CategoryCard />
+            <CategoryCard />
+            <CategoryCard />
+          </div>
         </section>
       </main>
       <footer className="sticky top-[100vh]">
