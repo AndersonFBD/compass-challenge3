@@ -6,6 +6,7 @@ import Titles from "../../components/mainPage/Titles";
 import Searchbar from "../../components/searchbar/Searchbar";
 import { TourProps } from "../../types/tourProps";
 import { LuPlayCircle } from "react-icons/lu";
+import { PiQuotes } from "react-icons/pi";
 import { ImCheckmark2 } from "react-icons/im";
 
 import axios from "axios";
@@ -272,6 +273,46 @@ const Home = () => {
             <CategoryCard />
             <CategoryCard />
             <CategoryCard />
+          </div>
+        </section>
+        <section className="flex bg-[#F7F8FA] items-center align-middle justify-evenly px-[10%]  min-h-[60vh] w-full">
+          <div className="flex flex-col w-[50%] items-center justify-center relative">
+            <div className="relative z-0 top-16 bg-transparent border-none">
+              <img
+                src="https://challenge3storedpictures.s3.us-east-2.amazonaws.com/general-assets/testimonials1.png"
+                alt=""
+              />
+            </div>
+            <div className="relative z-20  bg-transparent border-none">
+              <img
+                src="https://challenge3storedpictures.s3.us-east-2.amazonaws.com/general-assets/testimonials3.png"
+                alt=""
+              />
+            </div>
+            <div className="relative bottom-16 z-10 bg-transparent border-none">
+              <img
+                src="https://challenge3storedpictures.s3.us-east-2.amazonaws.com/general-assets/testimonials2.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="flex flex-col w-[50%] z-10 align-center justify-center">
+            <div>
+              <Titles title="Testimonials" BoldText="What Travelers Say" />
+            </div>
+            <div className="text-[#fc5056] flex justify-center my-12">
+              <PiQuotes size={32} />
+            </div>
+            <div className="font-work font-bold text-lg mx-[18%] w-[64%] flex">
+              <p>
+                “The UI designs he crafted are top-notch, and the design system
+                he integrated allows for straight forward fixes and bulk updates
+                throughout almost every area of the app.”
+              </p>
+            </div>
+            <div className="font-inter text-[#a9afbb] mt-4">
+              <p>-By Molie Rosa, Photographer</p>
+            </div>
           </div>
         </section>
       </main>
