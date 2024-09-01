@@ -60,10 +60,10 @@ router.post("/review/add", async (req: Request, res: Response) => {
 //reviews of a particular tour
 router.get("/reviews/:tourId", async (req: Request, res: Response) => {
   try {
-    const tours = await ReviewInstance.findAll({
+    const reviews = await ReviewInstance.findAll({
       where: { tourId: req.params.tourId },
     });
-    return res.json({ tours });
+    return res.json(reviews);
   } catch (error) {
     return res.json({
       msg: "error on search",

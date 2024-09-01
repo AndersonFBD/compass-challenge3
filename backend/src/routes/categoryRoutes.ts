@@ -29,4 +29,21 @@ router.get("/categories", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/category/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const type = await CategoryInstance.findOne({
+      where: {
+        id: id,
+      },
+    });
+    return res.json(type);
+  } catch (error) {
+    return res.json({
+      msg: "error on search",
+      status: 500,
+    });
+  }
+});
+
 export default router;

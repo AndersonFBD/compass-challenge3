@@ -71,19 +71,9 @@ router.get("/tour/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/card-info/:id", async (req: Request, res: Response) => {
+router.get("/reviews-of-tour/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
-    const countryName = await TourInstance.findOne({
-      include: [
-        {
-          model: CountryInstance,
-          as: "country",
-          attributes: ["name"],
-        },
-      ],
-    });
-
     const reviewCount = await ReviewInstance.count({
       where: {
         tourId: id,
@@ -101,7 +91,6 @@ router.get("/card-info/:id", async (req: Request, res: Response) => {
     });
 
     return res.json({
-      countryName,
       reviewCount,
       avgRate,
     });
