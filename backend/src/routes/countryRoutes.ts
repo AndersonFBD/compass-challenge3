@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { CountryInstance } from "../model/country";
 import { sql } from "@sequelize/core";
+import { where } from "sequelize";
 
 const router = express.Router();
 
@@ -23,6 +24,23 @@ router.get("/countries", async (req: Request, res: Response) => {
   try {
     const countries = await CountryInstance.findAll();
     return res.json({ countries });
+  } catch (error) {
+    return res.json({
+      msg: "error on search",
+      status: 500,
+    });
+  }
+});
+
+router.get("/country/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const country = await CountryInstance.findOne({
+      where: {
+        id: id,
+      },
+    });
+    return res.json(country);
   } catch (error) {
     return res.json({
       msg: "error on search",

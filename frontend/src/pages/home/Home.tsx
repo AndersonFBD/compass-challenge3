@@ -11,6 +11,7 @@ import { ImCheckmark2 } from "react-icons/im";
 
 import axios from "axios";
 import CategoryCard from "../../components/cards/CategoryCard";
+import BlogUpdateCard from "../../components/mainPage/BlogUpdateCard";
 
 const Home = () => {
   document.title = "Trisog - Home";
@@ -313,6 +314,19 @@ const Home = () => {
             <div className="font-inter text-[#a9afbb] mt-4">
               <p>-By Molie Rosa, Photographer</p>
             </div>
+          </div>
+        </section>
+        <section className="flex my-32 flex-col items-center align-middle justify-evenly px-[10%]  min-h-[60vh] w-full">
+          <div className="mb-24">
+            <Titles title="Updates" BoldText="Latest Travel Guide" />
+          </div>
+          <div className="my-4 flex flex-row w-full justify-around h-52">
+            <BlogUpdateCard />
+            <BlogUpdateCard />
+          </div>
+          <div className="flex flex-row w-full justify-around h-52">
+            <BlogUpdateCard />
+            <BlogUpdateCard />
           </div>
         </section>
       </main>
