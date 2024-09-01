@@ -142,6 +142,13 @@ const TourDetails = () => {
             </p>
             <p className="font-inter text-[#676D85]">{tourdata?.overview}</p>
           </div>
+          <div
+            id="map-area"
+            className="w-full text-left flex flex-col justify-between"
+          >
+            <p className="font-work px-4 font-bold text-2xl">Map</p>
+            <div className="w-full my-4 max-h-[400px]"></div>
+          </div>
         </section>
         <section
           id="bookingMenu"
