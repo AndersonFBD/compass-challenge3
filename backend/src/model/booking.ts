@@ -64,7 +64,7 @@ BookingInstance.init(
     total: {
       type: DataTypes.REAL,
       allowNull: false,
-      defaultValue: 1,
+      defaultValue: 0,
     },
   },
   {

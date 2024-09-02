@@ -7,7 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/tour/:id" element={<TourDetails />} />
+      <Route path="/tours/:id" element={<TourDetails />} />
       <Route path="*" element={<Navigate to="/" replace={true} />} />
     </Routes>
   );

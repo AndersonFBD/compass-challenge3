@@ -5,21 +5,29 @@ import { FiMapPin, FiShare2, FiHeart } from "react-icons/fi";
 import { FaStar } from "react-icons/fa6";
 import axios from "axios";
 import { TourProps } from "../../types/tourProps";
+import Map from "../../components/tourmap/Map";
 
 const TourDetails = () => {
   //pegar id do card para fazer a requisição
 
   function getCardId() {
-    const id = String(window.location.href).split("/tour/");
+    const id = String(window.location.href).split("/tours/");
     return id[1];
   }
 
   const Tour_id = getCardId();
 
+  const [adultCount, setAdultCount] = useState(0);
+  const [kidsCount, setKidsCount] = useState(0);
+  const [childrenCount, setChildrenCount] = useState(0);
+
   const [tourdata, setTourData] = useState<TourProps>();
   const [countrydata, setCountryData] = useState<string>();
   const [tourType, setTourType] = useState<string>();
   const [reviewCountInfo, setReviewCountInfo] = useState<object>();
+  const [tourlat, settourlat] = useState<number>();
+  const [tourlng, settourlng] = useState<number>();
+
   const getTour = async () => {
     try {
       const { data } = await axios.get(`http://localhost:8000/tour/${Tour_id}`);
@@ -35,6 +43,12 @@ const TourDetails = () => {
       setCountryData(tourCountry.data.name);
       setTourType(tourType.data.name);
       setReviewCountInfo(reviewResponse.data);
+      const location = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${data.tour.city}+${tourCountry.data.name}&key=AIzaSyBi_ewIoohQRPME0aKqio1k4qAFyeSkNsw`
+      );
+
+      settourlat(location?.data.results[0].geometry.location.lat);
+      settourlng(location?.data.results[0].geometry.location.lng);
     } catch (e) {
       console.error("Error fetching tours:", e);
     }
@@ -52,7 +66,7 @@ const TourDetails = () => {
       <main className="flex flex-row w-full justify-between px-32 h-auto">
         <section
           id="tourContainer"
-          className="flex flex-col items-center w-[60vw] justify-center border border-black"
+          className="flex flex-col items-center w-[60vw] justify-center"
         >
           <div id="tour-img" className="flex max-h-[60vh] w-full">
             <img
@@ -142,11 +156,141 @@ const TourDetails = () => {
             </p>
             <p className="font-inter text-[#676D85]">{tourdata?.overview}</p>
           </div>
+          <div
+            id="map-area"
+            className="w-full text-left flex flex-col justify-between"
+          >
+            <p className="font-work px-4 font-bold text-2xl">Map</p>
+            <div className="w-full my-4 min-h-[400px] mb-16">
+              <Map latitude={Number(tourlat)} longitude={Number(tourlng)} />
+            </div>
+          </div>
         </section>
         <section
           id="bookingMenu"
-          className="w-[20vw] border-4 border-red-700 h-[80vh]"
-        ></section>
+          className="w-[20vw] px-[1%] bg-[#F7F8FA]  h-[80vh] flex flex-col justify-evenly items-center"
+        >
+          <div className="w-[90%] border-b border-[#a9afbb] text-left">
+            <p className="font-work text-[32px] font-bold">
+              ${tourdata?.price}
+              <span className="font-inter text-base font-normal">
+                {" "}
+                / per person
+              </span>
+            </p>
+          </div>
+          <div className="w-[90%] text-left">
+            <p className="font-work font-semibold text-base">Date</p>
+            <input
+              type="date"
+              name="Date"
+              className="border w-full my-2 border-[#a9afbb]"
+            />
+          </div>
+          <div className="w-[90%] text-left">
+            <p className="font-work font-semibold text-base">Time</p>
+            <input
+              type="number"
+              min={3}
+              name="time"
+              className="border w-full my-2 border-[#a9afbb]"
+            />
+          </div>
+          <div className="flex w-[90%] flex-col">
+            <p className="font-work font-semibold text-base mb-4 text-left">
+              Ticket
+            </p>
+            <div className="my-1 flex w-[100%] flex-row justify-between">
+              <p>Adults (18+ years)</p>
+              <div className="flex flex-row w-[120px] justify-between items-center ">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setAdultCount(adultCount == 0 ? 0 : adultCount - 1)
+                  }
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  -
+                </button>
+                <div className="flex items-center justify-center font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]">
+                  <p>{adultCount}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAdultCount(adultCount + 1)}
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="my-1 flex w-[100%] flex-row justify-between">
+              <p>Kids (12+ years)</p>
+              <div className="flex flex-row w-[120px] justify-between items-center ">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setKidsCount(kidsCount == 0 ? 0 : kidsCount - 1)
+                  }
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  -
+                </button>
+                <div className="flex items-center justify-center font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]">
+                  <p>{kidsCount}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setKidsCount(kidsCount + 1)}
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="my-1 flex w-[100%] flex-row pb-4 justify-between border-b border-[#a9afbb]">
+              <p>Children (3+ years)</p>
+              <div className="flex flex-row w-[120px] justify-between items-center ">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setChildrenCount(childrenCount == 0 ? 0 : childrenCount - 1)
+                  }
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  -
+                </button>
+                <div className="flex items-center justify-center font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]">
+                  <p>{childrenCount}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setChildrenCount(childrenCount + 1)}
+                  className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="flex w-full mt-4 justify-between">
+              <p className="font-inter text-sm">total</p>
+              <p className="font-work font-bold text-2xl text-[#fc5056]">
+                $
+                {Number(tourdata?.price) * adultCount +
+                  Number(tourdata?.price) * 0.9 * kidsCount +
+                  Number(tourdata?.price) * 0.7 * childrenCount}
+              </p>
+            </div>
+            <div className="w-full h-8 mt-4">
+              <button
+                type="button"
+                className="w-full h-8 bg-[#FC5056] rounded-lg text-white font-inter text-center font-medium text-[15px]"
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
       <footer className="sticky top-[100vh]">
         <Footer />

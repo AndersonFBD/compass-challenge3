@@ -12,18 +12,18 @@ import { ImCheckmark2 } from "react-icons/im";
 import axios from "axios";
 import CategoryCard from "../../components/cards/CategoryCard";
 import BlogUpdateCard from "../../components/mainPage/BlogUpdateCard";
+import TourSlider from "../../components/sliders/TourSlider";
+import { SwiperSlide } from "swiper/react";
 
 const Home = () => {
   document.title = "Trisog - Home";
 
-  //carousel
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 200,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 2,
-  // };
+  const settings = {
+    spaceBetween: 12,
+    slidesPerView: 3,
+    navigation: true,
+    pagination: true,
+  };
 
   //tour cards
   const [tourdata, setTourData] = useState<TourProps[]>([]);
@@ -70,15 +70,17 @@ const Home = () => {
         </div>
         <section className="flex flex-col items-center justify-center mt-12">
           <Titles title="Tours" BoldText="Most Popular Tours" />
-          <div className="flex flex-row">
-            {/* <Slider {...settings}> */}
-            {tourdata &&
-              tourdata.map((tour: TourProps) => (
-                <div key={tour.id} className="p-4">
-                  <TourCard key={tour.id} {...tour} />
-                </div>
-              ))}
-            {/* </Slider> */}
+          <div className="flex flex-row h-[100%] w-[80%] p-24">
+            <TourSlider settings={settings}>
+              {tourdata &&
+                tourdata.map((tour: TourProps) => (
+                  <SwiperSlide key={tour.id}>
+                    <div key={tour.id} className="p-4">
+                      <TourCard {...tour} />
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </TourSlider>
           </div>
           <div className="flex flex-row w-[80vw] mx-[10vw] my-32 justify-evenly border-t-2 border-[#A9AFBB] pt-12">
             <p className="font-kaushan text-[40px] text-black">
