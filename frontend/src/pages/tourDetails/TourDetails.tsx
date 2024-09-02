@@ -5,6 +5,7 @@ import { FiMapPin, FiShare2, FiHeart } from "react-icons/fi";
 import { FaStar } from "react-icons/fa6";
 import axios from "axios";
 import { TourProps } from "../../types/tourProps";
+import Map from "../../components/tourmap/Map";
 
 const TourDetails = () => {
   //pegar id do card para fazer a requisição
@@ -20,6 +21,9 @@ const TourDetails = () => {
   const [countrydata, setCountryData] = useState<string>();
   const [tourType, setTourType] = useState<string>();
   const [reviewCountInfo, setReviewCountInfo] = useState<object>();
+  const [tourlat, settourlat] = useState<number>();
+  const [tourlng, settourlng] = useState<number>();
+
   const getTour = async () => {
     try {
       const { data } = await axios.get(`http://localhost:8000/tour/${Tour_id}`);
@@ -35,6 +39,12 @@ const TourDetails = () => {
       setCountryData(tourCountry.data.name);
       setTourType(tourType.data.name);
       setReviewCountInfo(reviewResponse.data);
+      const location = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${data.tour.city}+${tourCountry.data.name}&key=AIzaSyBi_ewIoohQRPME0aKqio1k4qAFyeSkNsw`
+      );
+
+      settourlat(location?.data.results[0].geometry.location.lat);
+      settourlng(location?.data.results[0].geometry.location.lng);
     } catch (e) {
       console.error("Error fetching tours:", e);
     }
@@ -147,7 +157,9 @@ const TourDetails = () => {
             className="w-full text-left flex flex-col justify-between"
           >
             <p className="font-work px-4 font-bold text-2xl">Map</p>
-            <div className="w-full my-4 max-h-[400px]"></div>
+            <div className="w-full my-4 min-h-[400px] mb-16">
+              <Map latitude={Number(tourlat)} longitude={Number(tourlng)} />
+            </div>
           </div>
         </section>
         <section
