@@ -21,7 +21,7 @@ const TourCard: React.FC<TourProps> = ({
   avgRating,
 }: TourProps) => {
   return (
-    <Link to={`/tour/${id}`}>
+    <Link to={`/tours/${id}`}>
       <div
         id="card"
         className="w-[270px] mx-3 bg-[#F7F8FA] border border-gray-200  shadow"

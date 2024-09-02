@@ -11,7 +11,7 @@ const TourDetails = () => {
   //pegar id do card para fazer a requisição
 
   function getCardId() {
-    const id = String(window.location.href).split("/tour/");
+    const id = String(window.location.href).split("/tours/");
     return id[1];
   }
 
