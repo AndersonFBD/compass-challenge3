@@ -23,6 +23,7 @@ BookingInstance.init(
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
+      unique: true,
     },
     tourId: {
       type: DataTypes.INTEGER,
@@ -35,7 +36,6 @@ BookingInstance.init(
     user: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     date: {
       type: DataTypes.DATE,

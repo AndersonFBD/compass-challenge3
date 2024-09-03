@@ -37,10 +37,10 @@ router.post("/booking/add", async (req: Request, res: Response) => {
       children,
       total,
     });
-    return res.json({ booking, msg: "success on adding booking" });
+    return res.status(201).send({ booking, msg: "success on adding booking" });
   } catch (error) {
     return res.json({
-      msg: "error on creation",
+      msg: `error on creation: ${error}`,
       status: 500,
     });
   }
@@ -49,7 +49,7 @@ router.post("/booking/add", async (req: Request, res: Response) => {
 router.get("/bookings", async (req: Request, res: Response) => {
   try {
     const booking = await BookingInstance.findAll();
-    return res.json({ booking });
+    return res.json(booking);
   } catch (error) {
     return res.json({
       msg: "error on search",
