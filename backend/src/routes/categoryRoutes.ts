@@ -1,5 +1,7 @@
 import express, { Request, Response } from "express";
 import { CategoryInstance } from "../model/category";
+import { TourInstance } from "../model/tour";
+import { Sequelize } from "sequelize";
 
 const router = express.Router();
 
