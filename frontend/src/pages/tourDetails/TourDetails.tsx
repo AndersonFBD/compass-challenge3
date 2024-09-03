@@ -8,6 +8,7 @@ import { TourProps } from "../../types/tourProps";
 import Map from "../../components/tourmap/Map";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 interface booking {
   tourId: number;
@@ -142,6 +143,20 @@ const TourDetails = () => {
       });
   }
 
+  function handleRateDescription(rate: number): string {
+    console.log(rate);
+    switch (true) {
+      case rate > 4:
+        return "Excellent";
+      case rate > 3:
+        return "good";
+      case rate > 2:
+        return "meh";
+      default:
+        return "insatisfactory";
+    }
+  }
+
   return (
     <>
       <header className="sticky bottom-[100vh]">
@@ -162,7 +177,7 @@ const TourDetails = () => {
             id="icons-and-location"
             className="my-4 w-[100%] flex flex-row justify-between text-left"
           >
-            <div className="flex flex-row justify-between px-4 items-center w-[25%]">
+            <div className="flex flex-row justify-between items-center w-[25%]">
               <FiMapPin size={24} />
               <p className="font-inter text-sm text-[#676D85]">
                 {tourdata?.city}, {countrydata}
@@ -176,7 +191,7 @@ const TourDetails = () => {
           </div>
           <div id="Tour-Title" className="w-full border-b-2  py-4 mb-2 flex ">
             <p
-              className="text-black w-full text-left px-4
+              className="text-black w-full text-left 
              font-work font-bold text-[32px] h-auto "
             >
               {tourdata?.title}
@@ -185,7 +200,7 @@ const TourDetails = () => {
           <div
             id="tour-general-info"
             className="flex flex-row
-          w-full justify-between px-4 text-left"
+          w-full justify-between  text-left"
           >
             <div className="flex flex-col">
               <p className="text-[#A9AFBB] font-inter text-sm">From</p>
@@ -231,10 +246,7 @@ const TourDetails = () => {
               </div>
             </div>
           </div>
-          <div
-            id="overview"
-            className="my-12 flex flex-col w-full px-4 text-left"
-          >
+          <div id="overview" className="my-12 flex flex-col w-full text-left">
             <p className="font-work font-bold text-2xl text-black my-4">
               Overview
             </p>
@@ -244,9 +256,117 @@ const TourDetails = () => {
             id="map-area"
             className="w-full text-left flex flex-col justify-between"
           >
-            <p className="font-work px-4 font-bold text-2xl">Map</p>
+            <p className="font-work font-bold text-2xl">Map</p>
             <div className="w-full my-4 min-h-[400px] mb-16">
               <Map latitude={Number(tourlat)} longitude={Number(tourlng)} />
+            </div>
+          </div>
+          <div className="w-full text-left flex flex-col justify-between">
+            <p className="font-work font-bold text-2xl">Average Reviews</p>
+            <div className="w-full px-8 my-16 bg-[#F7F8FA] text-left flex items-center flex-row justify-between">
+              <div className="flex p-4 m-12 bg-[#FD5056] flex-col justify-center items-center text-white">
+                <p className="font-bold font-work text-[58px]">
+                  {Number(reviewCountInfo?.reviewCount) > 0
+                    ? String(reviewCountInfo?.avgRate.averageRating)
+                    : 0}
+                </p>
+                <div className="flex w-full text-white items-center mx-4 justify-evenly font-inter text-base">
+                  <FaStar />
+                  <p>
+                    {handleRateDescription(
+                      Number(reviewCountInfo?.avgRate.averageRating)
+                    )}
+                  </p>
+                </div>
+              </div>
+              <div className="flex w-[30%] text-left font-inter text-base flex-col justify-evenly">
+                <p>Services</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averageService}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averageService}</p>
+                </div>
+                <p>Locations</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averageLocations}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averageLocations}</p>
+                </div>
+                <p>Amenities</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averageAmenities}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averageAmenities}</p>
+                </div>
+              </div>
+              <div className="flex w-[30%] text-left font-inter text-base flex-col justify-evenly">
+                <p>Prices</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averagePrices}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averagePrices}</p>
+                </div>
+                <p>Food</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averageFoods}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averageFoods}</p>
+                </div>
+                <p>Room comfort and quality</p>
+                <div className="w-auto flex flex-row justify-between items-center">
+                  <ProgressBar
+                    completed={reviewCountInfo?.avgRate.averageComfort}
+                    bgColor="#fd5056"
+                    width="800%"
+                    height="10px"
+                    isLabelVisible={true}
+                    baseBgColor="#D9D9D9"
+                    labelColor="#fd5056"
+                    maxCompleted={5}
+                  />
+                  <p>{reviewCountInfo?.avgRate.averageComfort}</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
