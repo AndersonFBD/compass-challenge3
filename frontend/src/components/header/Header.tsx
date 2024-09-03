@@ -7,9 +7,19 @@ import {
 } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
+import { getAuth } from "firebase/auth";
 
 const Header = () => {
-  const isloggedIn = true;
+  function handleSession() {
+    if (getAuth().currentUser) {
+      getAuth().signOut();
+      sessionStorage.removeItem("mail");
+      return window.location.replace("/");
+    } else {
+      return window.location.replace("/login");
+    }
+  }
+
   return (
     <div className="flex flex-col justify-stretch mx-auto min-w-[100%] min-h-20 bg-[#f3f3f5] items-center">
       <div className="flex flex-row w-full h-4 justify-between my-2">
@@ -122,9 +132,14 @@ const Header = () => {
             </button>
           </div>
           <div className="flex flex-row mx-8 align-middle">
-            <button className="w-auto flex text-lg items-center justify-between hover:text-[#FC5056]">
+            <button
+              onClick={() => handleSession()}
+              className="w-auto flex text-lg items-center justify-between hover:text-[#FC5056]"
+            >
               <AiOutlineUser size={24} />
-              <span>{isloggedIn ? "Logout" : "Login/Signup"}</span>
+              <span>
+                {sessionStorage.getItem("mail") ? "Logout" : "Login/Signup"}
+              </span>
             </button>
           </div>
         </div>

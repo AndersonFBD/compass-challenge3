@@ -20,7 +20,7 @@ const Home = () => {
 
   const settings = {
     spaceBetween: 12,
-    slidesPerView: 3,
+    slidesPerView: 4,
     navigation: true,
     pagination: true,
   };
