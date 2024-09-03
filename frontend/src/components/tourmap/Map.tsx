@@ -22,7 +22,7 @@ const Map: React.FC<coordinates> = ({ latitude, longitude }: coordinates) => {
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "100%" }}
           center={position}
-          zoom={15}
+          zoom={10}
         >
           <></>
           <Marker position={position} />

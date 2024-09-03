@@ -3,7 +3,7 @@ import { UserContext } from "../contexts/authContext/userContext";
 import { useContext } from "react";
 
 const ProtectedRoutes = () => {
-  const currentUser = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   return currentUser ? <Outlet /> : <Navigate to="/" />;
 };
 
