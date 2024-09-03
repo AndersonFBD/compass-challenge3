@@ -112,22 +112,34 @@ const TourDetails = () => {
         theme: "colored",
       });
     }
-    try {
-      await axios.post("http://localhost:8000/booking/add", details);
-      console.log(details);
-    } catch (error) {
-      console.error("Error details:", error);
-      toast.error(`Something went wrong: ${error}`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
+
+    await axios
+      .post("http://localhost:8000/booking/add", details)
+      .then((res) =>
+        toast.success(`tour booked successfully!`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
+      )
+      .catch((error) => {
+        console.error("Error details:", error);
+        toast.error(`Something went wrong: ${error}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
-    }
   }
 
   return (
