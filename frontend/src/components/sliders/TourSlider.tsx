@@ -13,7 +13,12 @@ interface SliderProps {
 
 export default function TourSlider({ settings, children }: SliderProps) {
   return (
-    <Swiper modules={[Navigation, Pagination, A11y]} {...settings}>
+    <Swiper
+      modules={[Navigation, Pagination, A11y]}
+      loop={true}
+      centeredSlides={false}
+      {...settings}
+    >
       {children}
     </Swiper>
   );
