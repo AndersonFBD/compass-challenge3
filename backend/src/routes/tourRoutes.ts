@@ -86,6 +86,15 @@ router.get("/reviews-of-tour/:id", async (req: Request, res: Response) => {
       },
       attributes: [
         [Sequelize.fn("AVG", Sequelize.col("Overall_rating")), "averageRating"],
+        [Sequelize.fn("AVG", Sequelize.col("services")), "averageService"],
+        [Sequelize.fn("AVG", Sequelize.col("locations")), "averageLocations"],
+        [Sequelize.fn("AVG", Sequelize.col("prices")), "averagePrices"],
+        [Sequelize.fn("AVG", Sequelize.col("food")), "averageFoods"],
+        [Sequelize.fn("AVG", Sequelize.col("amenities")), "averageAmenities"],
+        [
+          Sequelize.fn("AVG", Sequelize.col("comfort_and_quality")),
+          "averageComfort",
+        ],
       ],
       raw: true,
     });
