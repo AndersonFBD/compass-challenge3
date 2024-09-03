@@ -6,6 +6,19 @@ import { FaStar } from "react-icons/fa6";
 import axios from "axios";
 import { TourProps } from "../../types/tourProps";
 import Map from "../../components/tourmap/Map";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+interface booking {
+  tourId: number;
+  user: string;
+  date: string;
+  time: number;
+  adults: number;
+  kids: number;
+  children: number;
+  total: number;
+}
 
 const TourDetails = () => {
   //pegar id do card para fazer a requisição
@@ -20,6 +33,8 @@ const TourDetails = () => {
   const [adultCount, setAdultCount] = useState(0);
   const [kidsCount, setKidsCount] = useState(0);
   const [childrenCount, setChildrenCount] = useState(0);
+  const [tourDate, setTourDate] = useState("");
+  const [tourTime, setTourTime] = useState(0);
 
   const [tourdata, setTourData] = useState<TourProps>();
   const [countrydata, setCountryData] = useState<string>();
@@ -57,6 +72,75 @@ const TourDetails = () => {
   useEffect(() => {
     getTour();
   }, []);
+
+  async function handleBooking() {
+    const details: booking = {
+      user: String(sessionStorage.getItem("mail")),
+      tourId: Number(Tour_id),
+      date: tourDate,
+      time: tourTime,
+      adults: Number(adultCount),
+      kids: Number(kidsCount),
+      children: Number(childrenCount),
+      total: Number(
+        Number(tourdata?.price) * adultCount +
+          Number(tourdata?.price) * 0.9 * kidsCount +
+          Number(tourdata?.price) * 0.7 * childrenCount
+      ),
+    };
+    if (details.total === 0) {
+      toast.error(`no ticket added!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+    if (details.date === "" || details.time == 0) {
+      toast.error(`must provide an initial date and the number of days!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    await axios
+      .post("http://localhost:8000/booking/add", details)
+      .then((res) =>
+        toast.success(`tour booked successfully!`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
+      )
+      .catch((error) => {
+        console.error("Error details:", error);
+        toast.error(`Something went wrong: ${error}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+  }
 
   return (
     <>
@@ -184,6 +268,8 @@ const TourDetails = () => {
             <input
               type="date"
               name="Date"
+              id="bookingDate"
+              onChange={(e) => setTourDate(e.target.value)}
               className="border w-full my-2 border-[#a9afbb]"
             />
           </div>
@@ -193,6 +279,8 @@ const TourDetails = () => {
               type="number"
               min={3}
               name="time"
+              id="bookingTime"
+              onChange={(e) => setTourTime(Number(e.target.value))}
               className="border w-full my-2 border-[#a9afbb]"
             />
           </div>
@@ -252,8 +340,8 @@ const TourDetails = () => {
               <p>Children (3+ years)</p>
               <div className="flex flex-row w-[120px] justify-between items-center ">
                 <button
-                  type="button"
-                  onClick={() =>
+                  type="submit"
+                  onSubmit={() =>
                     setChildrenCount(childrenCount == 0 ? 0 : childrenCount - 1)
                   }
                   className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"
@@ -274,7 +362,10 @@ const TourDetails = () => {
             </div>
             <div className="flex w-full mt-4 justify-between">
               <p className="font-inter text-sm">total</p>
-              <p className="font-work font-bold text-2xl text-[#fc5056]">
+              <p
+                id="totalPrice"
+                className="font-work font-bold text-2xl text-[#fc5056]"
+              >
                 $
                 {Number(tourdata?.price) * adultCount +
                   Number(tourdata?.price) * 0.9 * kidsCount +
@@ -284,6 +375,7 @@ const TourDetails = () => {
             <div className="w-full h-8 mt-4">
               <button
                 type="button"
+                onClick={handleBooking}
                 className="w-full h-8 bg-[#FC5056] rounded-lg text-white font-inter text-center font-medium text-[15px]"
               >
                 Book Now
@@ -295,6 +387,7 @@ const TourDetails = () => {
       <footer className="sticky top-[100vh]">
         <Footer />
       </footer>
+      <ToastContainer />
     </>
   );
 };

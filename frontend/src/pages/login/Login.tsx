@@ -173,7 +173,7 @@ const Login = () => {
               className="flex flex-row font-work 
               cursor-pointer  text-[12pt] font-medium rounded-2xl 
               justify-evenly items-center w-[44%] h-[5vh] m-[2%] 
-              bg-transparent border-none bg-red-700 text-white
+               border-none bg-red-600 text-white
               hover:text-[#fc5056] hover:bg-[#2917b1]"
               onClick={handleSignInGoogle}
             >
@@ -181,11 +181,8 @@ const Login = () => {
             </button>
             <button
               type="button"
-              className="flex flex-row font-work 
-              cursor-pointer  text-[12pt] font-medium rounded-2xl 
-              justify-evenly items-center w-[44%] h-[5vh] m-[2%] 
-              bg-transparent border-none bg-red-700 text-white
-              hover:text-[#fc5056] hover:bg-[#2917b1]"
+              className="flex flex-row font-work cursor-pointer  text-[12pt] font-medium rounded-2xl justify-evenly items-center w-[44%] h-[5vh] m-[2%] 
+              border-none bg-red-600 text-white hover:text-[#fc5056] hover:bg-[#2917b1]"
               onClick={handleSigninFacebook}
             >
               <ImFacebook2 /> <p>Facebook</p>
