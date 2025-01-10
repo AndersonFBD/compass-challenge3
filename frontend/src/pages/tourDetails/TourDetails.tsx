@@ -60,7 +60,7 @@ const TourDetails = () => {
       setTourType(tourType.data.name);
       setReviewCountInfo(reviewResponse.data);
       const location = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${data.tour.city}+${tourCountry.data.name}&key=hidden`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${data.tour.city}+${tourCountry.data.name}&key=redacted`
       );
 
       settourlat(location?.data.results[0].geometry.location.lat);
