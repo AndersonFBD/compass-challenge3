@@ -236,7 +236,11 @@ const TourDetails = () => {
                 <FaStar color="#FC5056" size={12} />
                 <p className="font-work font-semibold text-black">
                   {Number(reviewCountInfo?.reviewCount) > 0
-                    ? String(reviewCountInfo?.avgRate.averageRating)
+                    ? String(
+                        Number(reviewCountInfo?.avgRate.averageRating).toFixed(
+                          1
+                        )
+                      )
                     : 0}
                   <span className="font-inter text-sm text-[#A9AFBB]">
                     {" "}
@@ -267,7 +271,11 @@ const TourDetails = () => {
               <div className="flex p-4 m-12 bg-[#FD5056] flex-col justify-center items-center text-white">
                 <p className="font-bold font-work text-[58px]">
                   {Number(reviewCountInfo?.reviewCount) > 0
-                    ? String(reviewCountInfo?.avgRate.averageRating)
+                    ? String(
+                        Number(reviewCountInfo?.avgRate.averageRating).toFixed(
+                          1
+                        )
+                      )
                     : 0}
                 </p>
                 <div className="flex w-full text-white items-center mx-4 justify-evenly font-inter text-base">
@@ -283,88 +291,114 @@ const TourDetails = () => {
                 <p>Services</p>
                 <div className="w-auto flex flex-row justify-between items-center">
                   <ProgressBar
-                    completed={reviewCountInfo?.avgRate.averageService}
+                    completed={reviewCountInfo?.avgRate.averageService.toFixed(
+                      1
+                    )}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averageService}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averageService).toFixed(1)}
+                  </p>
                 </div>
                 <p>Locations</p>
                 <div className="w-auto flex flex-row justify-between items-center">
                   <ProgressBar
                     completed={reviewCountInfo?.avgRate.averageLocations}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averageLocations}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averageLocations).toFixed(
+                      1
+                    )}
+                  </p>
                 </div>
                 <p>Amenities</p>
                 <div className="w-auto flex flex-row justify-between items-center">
                   <ProgressBar
-                    completed={reviewCountInfo?.avgRate.averageAmenities}
+                    completed={Number(
+                      reviewCountInfo?.avgRate.averageAmenities
+                    ).toFixed(1)}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averageAmenities}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averageAmenities).toFixed(
+                      1
+                    )}
+                  </p>
                 </div>
               </div>
               <div className="flex w-[30%] text-left font-inter text-base flex-col justify-evenly">
                 <p>Prices</p>
-                <div className="w-auto flex flex-row justify-between items-center">
+                <div className="w-[100%] flex flex-row justify-between items-center">
                   <ProgressBar
-                    completed={reviewCountInfo?.avgRate.averagePrices}
+                    completed={Number(
+                      reviewCountInfo?.avgRate.averagePrices
+                    ).toFixed(1)}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averagePrices}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averagePrices).toFixed(1)}
+                  </p>
                 </div>
                 <p>Food</p>
-                <div className="w-auto flex flex-row justify-between items-center">
+                <div className="w-[100%] flex flex-row justify-between items-center">
                   <ProgressBar
-                    completed={reviewCountInfo?.avgRate.averageFoods}
+                    completed={Number(
+                      reviewCountInfo?.avgRate.averageFoods
+                    ).toFixed(1)}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averageFoods}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averageFoods).toFixed(1)}
+                  </p>
                 </div>
                 <p>Room comfort and quality</p>
                 <div className="w-auto flex flex-row justify-between items-center">
                   <ProgressBar
-                    completed={reviewCountInfo?.avgRate.averageComfort}
+                    completed={Number(
+                      reviewCountInfo?.avgRate.averageComfort
+                    ).toFixed(1)}
                     bgColor="#fd5056"
-                    width="800%"
+                    width="600%"
                     height="10px"
                     isLabelVisible={true}
                     baseBgColor="#D9D9D9"
                     labelColor="#fd5056"
                     maxCompleted={5}
                   />
-                  <p>{reviewCountInfo?.avgRate.averageComfort}</p>
+                  <p>
+                    {Number(reviewCountInfo?.avgRate.averageComfort).toFixed(1)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -461,7 +495,7 @@ const TourDetails = () => {
               <div className="flex flex-row w-[120px] justify-between items-center ">
                 <button
                   type="submit"
-                  onSubmit={() =>
+                  onClick={() =>
                     setChildrenCount(childrenCount == 0 ? 0 : childrenCount - 1)
                   }
                   className="font-work font-semibold w-8 h-8 text-center border rounded border-[#a9afbb]"

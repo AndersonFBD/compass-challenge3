@@ -8,7 +8,7 @@ interface coordinates {
 const Map: React.FC<coordinates> = ({ latitude, longitude }: coordinates) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBi_ewIoohQRPME0aKqio1k4qAFyeSkNsw",
+    googleMapsApiKey: String(process.env.GOOGLE_API_KEY),
   });
 
   const position = {

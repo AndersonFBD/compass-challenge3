@@ -24,12 +24,12 @@ const TourCard: React.FC<TourProps> = ({
     <Link to={`/tours/${id}`}>
       <div
         id="card"
-        className="w-[270px] bg-[#F7F8FA] border border-gray-200  shadow"
+        className="w-[270px] min-h-[420px] bg-[#F7F8FA] border border-gray-200  shadow"
       >
         <img
           className="rounded-t-lg max-w-[100%] max-h-48"
           src={imageurl}
-          alt=""
+          width={"100%"}
         />
 
         <div className="p-2 text-left">
